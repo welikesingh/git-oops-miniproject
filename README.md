@@ -60,7 +60,14 @@ git init
 git branch -M main
 
 git checkout -b feature-user
+
 # implement User, Student, Mentor
+# run    python -m src.main
+
 git add .
 git commit -m "Add User Student and Mentor classes"
 git push -u origin feature-user
+
+
+
+
