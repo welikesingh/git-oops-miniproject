@@ -81,4 +81,4 @@ class Course:
             print("Mentor        : Not assigned")
         print(f"Enrolled      : {len(self.students)}")
         print(f"Available     : {self.get_available_seats()}")
-
+        print( f"Enrollments   : {len(self.enrollments)}" )

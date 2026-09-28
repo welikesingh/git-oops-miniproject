@@ -3,16 +3,20 @@ from src.models.user import User
 
 class Student(User):
 
-    def __init__(self, name, email, course_name):
+    def __init__(self, name, email, course_name=None):
         super().__init__(name, email)
 
         self.course_name = course_name
         self.completed_assignments = []
+        self.enrollments = []
 
     def enroll(self, course_name):
         self.course_name = course_name
         print(f"{self.name} enrolled in {course_name}")
 
+    def add_enrollment(self, enrollment):
+        self.enrollments.append(enrollment)
+        
     def complete_assignment(self, assignment):
         self.completed_assignments.append(assignment)
         print(f"{self.name} completed: {assignment}")
@@ -27,6 +31,10 @@ class Student(User):
         print(
             f"Completed Assignments: "
             f"{len(self.completed_assignments)}"
+        )
+        print(
+            f"Enrollments: "
+            f"{len(self.enrollments)}"
         )
 
     def add_student(self, student):

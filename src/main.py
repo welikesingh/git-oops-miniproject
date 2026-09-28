@@ -2,20 +2,21 @@ from src.models.user import User
 from src.models.student import Student
 from src.models.mentor import Mentor
 from src.models.course import Course
-
+from src.models.enrollment import Enrollment
 def main():
 
-    student1 = Student(
+    # -------------------------
+    # Create Student
+    # -------------------------
+
+    student = Student(
         "John",
-        "john@example.com",
-        "Python Programming"
+        "john@example.com"
     )
 
-    student2 = Student(
-        "Sarah",
-        "sarah@example.com",
-        "Python Programming"
-    )
+    # -------------------------
+    # Create Mentor
+    # -------------------------
 
     mentor = Mentor(
         "Alice",
@@ -23,7 +24,10 @@ def main():
         "Python and AI"
     )
 
-    # Create course
+    # -------------------------
+    # Create Course
+    # -------------------------
+
     course = Course(
         "PY101",
         "Python Programming",
@@ -31,36 +35,52 @@ def main():
         30
     )
 
+    # -------------------------
+    # Assign Mentor
+    # -------------------------
 
-    # Assign mentor to course
     course.assign_mentor(mentor)
-    
-    # Enroll student
-    course.add_student(student1)
-    course.add_student(student2)
 
-    mentor.assign_student(student1)
-    mentor.assign_student(student2)
+    # -------------------------
+    # Add Student to Course
+    # -------------------------
 
+    course.add_student(student)
 
-    student1.complete_assignment("Assignment 1")
-    student2.complete_assignment("Assignment 2")
+    # -------------------------
+    # Create Enrollment
+    # -------------------------
 
+    enrollment = Enrollment(
+        student,
+        course
+    )
 
-    print("===== STUDENT =====")
-    student1.display_info()
-    student2.display_info()
+    # -------------------------
+    # Connect Enrollment
+    # -------------------------
 
-    print()
+    student.add_enrollment(enrollment)
 
-    print("===== MENTOR =====")
-    mentor.display_info()
+    course.add_enrollment(enrollment)
 
-    print()
+    # -------------------------
+    # Display Information
+    # -------------------------
 
-    print("===== COURSE =====")
+    student.display_info()
+
     course.display_info()
 
+    enrollment.display_info()
+
+    # -------------------------
+    # Complete Enrollment
+    # -------------------------
+
+    print("\nCompleting enrollment...")
+
+    enrollment.complete()
 
  
 
@@ -82,16 +102,16 @@ def main():
         print("Abstraction:", error)
 
     ## Test encapsulation
-    student1.email = "newemail@example.com"
-    print("Email updated to:", student1.email)
+    student.email = "newemail@example.com"
+    print("Email updated to:", student.email)
     try:
-        student1.email = "invalid-email"
+        student.email = "invalid-email"
     except ValueError as error:
         print("Encapsulation:", error)
 
     print("===== POLYMORPHISM ====")
     # Same method call display_role() works differently for each object
-    users = [student1, mentor]
+    users = [student, mentor]
     for user in users:
         print(f"{user.name} -> {user.display_role()}")
 
