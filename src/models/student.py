@@ -28,3 +28,21 @@ class Student(User):
             f"Completed Assignments: "
             f"{len(self.completed_assignments)}"
         )
+
+    def add_student(self, student):
+        if len(self.students) >= self.capacity:
+            print(f"Course {self.name} is full.")
+            return False
+        if student in self.students:
+            print(
+                f"{student.name} is already enrolled "
+                f"in {self.name}."
+            )
+            return False
+        self.students.append(student)
+        student.enroll(self.name)
+        print(
+            f"{student.name} enrolled in "
+            f"{self.name}"
+        )
+        return True
